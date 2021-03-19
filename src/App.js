@@ -1,26 +1,42 @@
 
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import { Navbar, Nav, Form} from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Header from './components/Header/Header';
+import Blog from './components/Blog/Blog';
+import Contact from './components/Contact/Contact';
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import NoPageFound from './components/NoPageFound/NoPageFound';
 
 function App() {
   return (
     <div className="App">
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Easy-Rides</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-          </Nav>
-          <Form inline>
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Destination</Nav.Link>
-            <Nav.Link href="#home">Blog</Nav.Link>
-            <Nav.Link href="#link">Contact</Nav.Link>
-            <Nav.Link href="#link">Login</Nav.Link>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
+      
+      <Router>
+      <Header></Header>
+        <Switch>
+          <Route path="/blog">
+            <Blog></Blog>
+          </Route>
+          <Route path="/contact">
+            <Contact></Contact>
+          </Route>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
+          <Route path="*">
+            <NoPageFound></NoPageFound>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
