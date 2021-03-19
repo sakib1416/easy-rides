@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import { Navbar, Nav, Form} from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../App';
+import { handleSignOut } from '../Login/LoginManager';
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const signOut = () => {
+        handleSignOut()
+        .then(response => {
+            setLoggedInUser(response);
+        })
+    }
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -22,7 +29,7 @@ const Header = () => {
                         loggedInUser.email ? <NavLink style={{padding: '5px'}} to="/contact">{loggedInUser.name}</NavLink> : <NavLink style={{padding: '5px'}} to="/login">Login</NavLink>
                     }
                     {
-                        loggedInUser.email && <NavLink style={{padding: '5px'}} to="/">Sign Out</NavLink>
+                        loggedInUser.email && <NavLink to="/login" onClick={signOut}>Sign Out</NavLink>
                     }
                 </Form>
                 </Navbar.Collapse>
