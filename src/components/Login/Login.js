@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { UserContext } from '../../App';
 import { handleGoogleSignIn, handleSignOut, signInWithEmailAndPassword} from './LoginManager';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 
 
@@ -11,6 +11,9 @@ const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [newUser, setNewUser] = useState({});
     const {register, handleSubmit, errors, watch} = useForm();
+    const history = useHistory();
+    const location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
     const googleSignIn = () => {
         handleGoogleSignIn()
         .then(response => setLoggedInUser(response))
@@ -27,6 +30,7 @@ const Login = () => {
             const {displayName, email} = response;
             const signedInUser = {name: displayName, email};
             setLoggedInUser(signedInUser);
+            history.replace(from);
             console.log(response);
         })
     }

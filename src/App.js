@@ -14,6 +14,7 @@ import Home from './components/Home/Home';
 import NoPageFound from './components/NoPageFound/NoPageFound';
 import { createContext, useState } from 'react';
 import Register from './components/Register/Register';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
@@ -29,9 +30,9 @@ function App() {
           <Route path="/blog">
             <Blog></Blog>
           </Route>
-          <Route path="/contact">
+          <PrivateRoute path="/contact">
             <Contact></Contact>
-          </Route>
+          </PrivateRoute>
           <Route path="/register">
             <Register></Register>
           </Route>
