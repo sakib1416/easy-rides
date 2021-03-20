@@ -39,3 +39,50 @@ export const handleSignOut = () => {
         return signedInUser;
     })
 }
+
+export const createUserWithEmailAndPassword = (name, email, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        //console.log(response);
+        const newUserInfo = response.user;
+        newUserInfo.error = '';
+        newUserInfo.success = true;
+        updateUserName(name);
+        return newUserInfo;
+      })
+      .catch(error => {
+        const newUserInfo = {};
+        newUserInfo.error = error.message;
+        newUserInfo.success = false;
+        return newUserInfo;
+      })
+}
+
+export const signInWithEmailAndPassword = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(response => {
+        const newUserInfo = response.user;
+        newUserInfo.error = '';
+        newUserInfo.success = true;
+        return newUserInfo;
+      })
+      .catch(error => {
+        const newUserInfo = {};
+        newUserInfo.error = error.message;
+        newUserInfo.success = false;
+        return newUserInfo;
+      }) 
+}
+
+const updateUserName = (name) => {
+    const user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: name
+    })
+    .then(response => {
+      console.log("user name updated");
+    })
+    .catch(error => {
+      console.log("There is an error", error);
+    })
+  }

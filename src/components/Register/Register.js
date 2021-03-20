@@ -3,10 +3,18 @@ import { UserContext } from '../../App';
 import { useForm } from "react-hook-form";
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { handleGoogleSignIn, handleSignOut} from '../Login/LoginManager';
+import { createUserWithEmailAndPassword, handleGoogleSignIn, handleSignOut, initializeLoginFramework} from '../Login/LoginManager';
+
+initializeLoginFramework();
 
 const Register = () => {
-    const [newUser, setNewUser] = useState({});
+    const [newUser, setNewUser] = useState({
+        name: '',
+        email: '',
+        password: '',
+        error: '',
+        success: false
+    });
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const {register, handleSubmit, errors, watch} = useForm();
     const googleSignIn = () => {
@@ -19,10 +27,21 @@ const Register = () => {
             setLoggedInUser(response);
         });
     }
+    const signUp = (data) => {
+        console.log("Calling sing up", data);
+        createUserWithEmailAndPassword(data.name, data.email, data.password)
+        .then(response => {
+            setNewUser(response);
+            const {name, email} = response;
+            const signedInUser = {name, email};
+            setLoggedInUser(signedInUser);
+            console.log(newUser);
+        })
+    }
     return (
         <div>
             <h1>This is register page</h1>
-            <Form onSubmit={handleSubmit((user) => setNewUser(user))}>
+            <Form onSubmit={handleSubmit(signUp)}>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" name="name" ref={register({required: "You must provide your full name"})} placeholder="Full Name" />
