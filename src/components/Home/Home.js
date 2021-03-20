@@ -8,7 +8,7 @@ const Home = () => {
     
     return (
         <div>
-            <h1>This is the home page</h1>
+            <h1>Welcome to Easy Rides</h1>
             {
                 transportData.map(transport =>  {
                     return (

@@ -42,7 +42,7 @@ const Login = () => {
                 loggedInUser.email ? <Button onClick = {signOut}>Sign Out</Button> : <Button onClick={googleSignIn}>Sign In With Google</Button>
             }
             <br/>
-            <div style={{width: '50%'}}>
+            <div>
                 <Form onSubmit={handleSubmit(signIn)}>
                     
                     <Form.Group controlId="formBasicEmail">

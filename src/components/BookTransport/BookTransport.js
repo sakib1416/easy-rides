@@ -34,7 +34,7 @@ const BookTransport = () => {
     }
     return (
         <div>
-            <h1>This is dynamic page {type}</h1>
+            <h1>Book your {type} trip</h1>
             {!searchResult.value && <Form onSubmit={handleSearch}>
                 <Form.Group>
                     <Form.Control type="text" name = "from" onBlur = {handleBlur} required placeholder="Pick from"  />
