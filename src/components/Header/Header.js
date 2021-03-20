@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <div>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand ><Link to ="/">Easy-Riders</Link></Navbar.Brand>
+                <Navbar.Brand ><Link to ="/">Easy-Rides</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

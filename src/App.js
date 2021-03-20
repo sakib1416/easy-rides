@@ -15,6 +15,7 @@ import NoPageFound from './components/NoPageFound/NoPageFound';
 import { createContext, useState } from 'react';
 import Register from './components/Register/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import BookTransport from './components/BookTransport/BookTransport';
 
 export const UserContext = createContext();
 
@@ -33,6 +34,9 @@ function App() {
           <PrivateRoute path="/contact">
             <Contact></Contact>
           </PrivateRoute>
+          <Route path = "/destination/:type">
+            <BookTransport></BookTransport>
+          </Route>
           <Route path="/register">
             <Register></Register>
           </Route>

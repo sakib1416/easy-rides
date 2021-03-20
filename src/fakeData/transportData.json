@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "type": "Bike",
+        "image": "https://cdn.pixabay.com/photo/2014/12/16/03/37/motorcycle-569865_960_720.jpg",
+        "passengers": 2,
+        "price": "$8"
+    },
+    {
+        "id": 2,
+        "type": "Car",
+        "image": "https://cdn.pixabay.com/photo/2012/04/24/14/21/car-40241_960_720.png",
+        "passengers": 5,
+        "price": "$15"
+    },
+    {
+        "id": 3,
+        "type": "Bus",
+        "image": "https://cdn.pixabay.com/photo/2014/04/03/11/55/bus-312565_960_720.png",
+        "passengers": 25,
+        "price": "$5"
+    },
+    {
+        "id": 4,
+        "type": "Train",
+        "image": "https://cdn.pixabay.com/photo/2013/07/13/12/10/railroad-159321_960_720.png",
+        "passengers": 100,
+        "price": "$10"
+    }
+]
