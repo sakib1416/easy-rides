@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, {useState, useContext} from 'react';
 import { UserContext } from '../../App';
-import { handleGoogleSignIn, handleSignOut} from './LoginManager';
 import { useForm } from "react-hook-form";
+import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { handleGoogleSignIn, handleSignOut} from '../Login/LoginManager';
 
-
-
-const Login = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+const Register = () => {
     const [newUser, setNewUser] = useState({});
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const {register, handleSubmit, errors, watch} = useForm();
     const googleSignIn = () => {
         handleGoogleSignIn()
@@ -23,14 +21,8 @@ const Login = () => {
     }
     return (
         <div>
-            <h1>Login Page</h1>
-            
-            {
-                loggedInUser.email ? <Button onClick = {signOut}>Sign Out</Button> : <Button onClick={googleSignIn}>Sign In With Google</Button>
-            }
-            <br/>
-            <div style={{width: '50%'}}>
-                <Form onSubmit={handleSubmit((user) => setNewUser(user))}>
+            <h1>This is register page</h1>
+            <Form onSubmit={handleSubmit((user) => setNewUser(user))}>
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" name="name" ref={register({required: "You must provide your full name"})} placeholder="Full Name" />
@@ -89,11 +81,13 @@ const Login = () => {
                         Submit
                     </Button>
                 </Form>
-                <div><p>Don't have an account? <Link to="/register">Register</Link> here</p></div>
-            </div>
-            
+                <div><p>Already have an account? <Link to="/login">Login</Link> here</p></div>
+                <br/>
+                {
+                    loggedInUser.email ? <Button onClick = {signOut}>Sign Out</Button> : <Button onClick={googleSignIn}>Sign In With Google</Button>
+                }
         </div>
     );
 };
 
-export default Login;
+export default Register;

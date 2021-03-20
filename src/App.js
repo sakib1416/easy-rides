@@ -13,6 +13,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import NoPageFound from './components/NoPageFound/NoPageFound';
 import { createContext, useState } from 'react';
+import Register from './components/Register/Register';
 
 export const UserContext = createContext();
 
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/contact">
             <Contact></Contact>
+          </Route>
+          <Route path="/register">
+            <Register></Register>
           </Route>
           <Route path="/login">
             <Login></Login>
