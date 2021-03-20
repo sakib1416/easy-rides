@@ -22,7 +22,7 @@ const Header = () => {
                 </Nav>
                 <Form inline>
                     <NavLink style={{padding: '5px'}} to="/">Home</NavLink>
-                    <NavLink style={{padding: '5px'}} to="/">Destination</NavLink>
+                    <NavLink style={{padding: '5px'}} to="/destination">Destination</NavLink>
                     <NavLink style={{padding: '5px'}} to="/blog">Blog</NavLink>
                     <NavLink style={{padding: '5px'}} to="/contact">Contact</NavLink>
                     {
