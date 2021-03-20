@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { UserContext } from '../../App';
-import { handleGoogleSignIn, handleSignOut} from './LoginManager';
+import { handleGoogleSignIn, handleSignOut, signInWithEmailAndPassword} from './LoginManager';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,15 @@ const Login = () => {
             setLoggedInUser(response);
         });
     }
+    const signIn = (data) => {
+        signInWithEmailAndPassword(data.email, data.password)
+        .then(response => {
+            const {displayName, email} = response;
+            const signedInUser = {name: displayName, email};
+            setLoggedInUser(signedInUser);
+            console.log(response);
+        })
+    }
     return (
         <div>
             <h1>Login Page</h1>
@@ -30,14 +39,8 @@ const Login = () => {
             }
             <br/>
             <div style={{width: '50%'}}>
-                <Form onSubmit={handleSubmit((user) => setNewUser(user))}>
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name="name" ref={register({required: "You must provide your full name"})} placeholder="Full Name" />
-                        <Form.Text className="text-muted">
-                            {errors.name && <div>{errors.name.message}</div>}
-                        </Form.Text>
-                    </Form.Group>
+                <Form onSubmit={handleSubmit(signIn)}>
+                    
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" name="email" ref={register({
@@ -72,17 +75,6 @@ const Login = () => {
                         placeholder="Password" />
                         <Form.Text className="text-muted">
                         {errors.password && <div>{errors.password.message}</div>}
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" name="confirmPassword" ref={register({
-                            required: "Please confirm your password",
-                            validate: (value) => value === watch('password') || "Please match"
-                            })} 
-                            placeholder="Confirm Password" />
-                        <Form.Text className="text-muted">
-                        {errors.confirmPassword && <div>{errors.confirmPassword.message}</div>}
                         </Form.Text>
                     </Form.Group>
                     <Button variant="primary" type="submit">

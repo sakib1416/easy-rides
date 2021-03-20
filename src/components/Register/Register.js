@@ -32,8 +32,8 @@ const Register = () => {
         createUserWithEmailAndPassword(data.name, data.email, data.password)
         .then(response => {
             setNewUser(response);
-            const {name, email} = response;
-            const signedInUser = {name, email};
+            const {displayName, email} = response;
+            const signedInUser = {name: displayName, email};
             setLoggedInUser(signedInUser);
             console.log(newUser);
         })
@@ -105,6 +105,7 @@ const Register = () => {
                 {
                     loggedInUser.email ? <Button onClick = {signOut}>Sign Out</Button> : <Button onClick={googleSignIn}>Sign In With Google</Button>
                 }
+                {newUser.success ? <p style={{color: 'green'}}>User Created</p> : <p style={{color: 'red'}}>{newUser.error}</p>}
         </div>
     );
 };
